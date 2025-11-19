@@ -1,0 +1,77 @@
+@page "/traffic"
+@rendermode InteractiveServer
+
+<PageTitle>Traffic Lights</PageTitle>
+
+<style>
+.column {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	width: max-content;
+}
+
+.circle {
+	width: @size;
+	height: @size;
+	border-style: solid;
+	border-radius: 50%;
+	background-color: #333333;
+}
+</style>
+
+<h1>Traffic Lights</h1>
+<p>Current state = @state</p>
+<div id="light-container" class="column">
+	<div id="red-light" class="circle" style="background-color: @redLight;"></div>
+	<div id="yellow-light" class="circle" style="background-color: @yellowLight;"></div>
+	<div id="green-light" class="circle" style="background-color: @greenLight;"></div>
+</div>
+<button id="wait-btn" @onclick="Wait">Wait</button>
+
+@code {
+	private string size = "150px";
+	private readonly Dictionary<string, string> colours = new Dictionary<string, string>{
+		{"red", "#ee0000"},
+		{"yellow", "#d0d000"},
+		{"green", "#00dd00"},
+		{"white", "#ffffff"}
+	};
+
+	// must initialize but cannot reference other fields, warning CS8618
+	private string redLight = "";
+	private string yellowLight = "";
+	private string greenLight = "";
+	private string state = "GO";
+
+	protected override void OnInitialized() {
+		redLight = colours["white"];
+		yellowLight = colours["white"];
+		greenLight = colours["green"];
+	}
+
+	private async Task Wait() {
+		state = "WARN_STOP";
+		yellowLight = colours["yellow"];
+		greenLight = colours["white"];
+		StateHasChanged();
+		await Task.Delay(2000);
+		
+		state = "STOP";
+		redLight = colours["red"];
+		yellowLight = colours["white"];
+		StateHasChanged();
+		await Task.Delay(3000);
+		
+		state = "WARN_GO";
+		yellowLight = colours["yellow"];
+		StateHasChanged();
+		await Task.Delay(2000);
+		
+		state = "GO";
+		redLight = colours["white"];
+		yellowLight = colours["white"];
+		greenLight = colours["green"];
+		StateHasChanged();
+	}
+}
