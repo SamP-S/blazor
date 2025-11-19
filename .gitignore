@@ -1,0 +1,70 @@
+# Visual Studio / VSCode files
+.vs/
+.vscode/
+*.code-workspace
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+bin/
+obj/
+out/
+
+# Rider
+.idea/
+
+# ASP.NET / Blazor temporary files
+wwwroot/_framework/
+wwwroot/_content/
+*.db
+*.log
+
+# Publish output
+publish/
+*.publish.xml
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Dotnet cache
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.vsix
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Node/npm (if you use npm for client-side tooling)
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+
+# Logs
+*.log
+
+# Certificates (if you use development SSL certs)
+*.pfx
+*.cer
+
+# Blazor WebAssembly specific
+blazor.boot.json
